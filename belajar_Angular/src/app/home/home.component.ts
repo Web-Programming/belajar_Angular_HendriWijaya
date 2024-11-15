@@ -12,6 +12,7 @@ import { HousingLocation } from '../housing-location';
 })
 export class HomeComponent {
   housingLocationList: HousingLocation[] = [
+    
     {
       id: 0,
       name: "name 1",

@@ -5,33 +5,116 @@ import { HousingLocation } from './housing-location';
   providedIn: 'root'
 })
 export class HousingService {
-  protected housingLocationlist:HousingLocation[]=[
+  readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
+  protected housingLocationList: HousingLocation[] = [
     {
       id: 0,
-      name: "name 1",
-      city: "city 1",
-      state: "state 1",
-      photo: "https://tjh.com/wp-content/uploads/2023/06/TJH_HERO_TJH-HOME@2x-1-1536x1021.webp",
-      availableUnits: 10,
+      name: 'Acme Fresh Start Housing',
+      city: 'Chicago',
+      state: 'IL',
+      photo: `${this.baseUrl}/bernard-hermant-CLKGGwIBTaY-unsplash.jpg`,
+      availableUnits: 4,
       wifi: true,
       laundry: true
     },
     {
       id: 1,
-      name: "name 2",
-      city: "city 2",
-      state: "state 2",
-      photo: "https://images.squarespace-cdn.com/content/v1/65a8583b3f2bb32732bff587/63ff3986-3c95-4422-bdaa-6a373b71140d/Custom-Luxury-Home-Dallas.jpg",
-      availableUnits: 12,
+      name: 'A113 Transitional Housing',
+      city: 'Santa Monica',
+      state: 'CA',
+      photo: `${this.baseUrl}/brandon-griggs-wR11KBaB86U-unsplash.jpg`,
+      availableUnits: 0,
+      wifi: false,
+      laundry: true
+    },
+    {
+      id: 2,
+      name: 'Warm Beds Housing Support',
+      city: 'Juneau',
+      state: 'AK',
+      photo: `${this.baseUrl}/i-do-nothing-but-love-lAyXdl1-Wmc-unsplash.jpg`,
+      availableUnits: 1,
+      wifi: false,
+      laundry: false
+    },
+    {
+      id: 3,
+      name: 'Homesteady Housing',
+      city: 'Chicago',
+      state: 'IL',
+      photo: `${this.baseUrl}/ian-macdonald-W8z6aiwfi1E-unsplash.jpg`,
+      availableUnits: 1,
+      wifi: true,
+      laundry: false
+    },
+    {
+      id: 4,
+      name: 'Happy Homes Group',
+      city: 'Gary',
+      state: 'IN',
+      photo: `${this.baseUrl}/krzysztof-hepner-978RAXoXnH4-unsplash.jpg`,
+      availableUnits: 1,
+      wifi: true,
+      laundry: false
+    },
+    {
+      id: 5,
+      name: 'Hopeful Apartment Group',
+      city: 'Oakland',
+      state: 'CA',
+      photo: `${this.baseUrl}/r-architecture-JvQ0Q5IkeMM-unsplash.jpg`,
+      availableUnits: 2,
       wifi: true,
       laundry: true
-  
+    },
+    {
+      id: 6,
+      name: 'Seriously Safe Towns',
+      city: 'Oakland',
+      state: 'CA',
+      photo: `${this.baseUrl}/phil-hearing-IYfp2Ixe9nM-unsplash.jpg`,
+      availableUnits: 5,
+      wifi: true,
+      laundry: true
+    },
+    {
+      id: 7,
+      name: 'Hopeful Housing Solutions',
+      city: 'Oakland',
+      state: 'CA',
+      photo: `${this.baseUrl}/r-architecture-GGupkreKwxA-unsplash.jpg`,
+      availableUnits: 2,
+      wifi: true,
+      laundry: true
+    },
+    {
+      id: 8,
+      name: 'Seriously Safe Towns',
+      city: 'Oakland',
+      state: 'CA',
+      photo: `${this.baseUrl}/saru-robert-9rP3mxf8qWI-unsplash.jpg`,
+      availableUnits: 10,
+      wifi: false,
+      laundry: false
+    },
+    {
+      id: 9,
+      name: 'Capital Safe Towns',
+      city: 'Portland',
+      state: 'OR',
+      photo: `${this.baseUrl}/webaliser-_TPTXZd9mOo-unsplash.jpg`,
+      availableUnits: 6,
+      wifi: true,
+      laundry: true
+    }
+  ];
   constructor() { }
 
   getAllHousingLocations() : HousingLocation[]{
-    return this.housingLocationlist;
+    return this.housingLocationList;
   }
-  getHousingLocationById(id: Number): HousingLocation | undefined{
-    return this.housingLocationlist.find(housingLocation => housingLocation.id == id)
+  getHousingLocationById(id: Number) : HousingLocation | undefined{
+    return this.housingLocationList.find(housingLocation => 
+      housingLocation.id == id);
   }
 }

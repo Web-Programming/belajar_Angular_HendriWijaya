@@ -22,7 +22,7 @@
     content: url("/location-pin.svg") / "";
   }
   
-  section .listing a {
+  section.listing a {
     padding-left: 20px;
     text-decoration: none;
     color: var(--primary-color);

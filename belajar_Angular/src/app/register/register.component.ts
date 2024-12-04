@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  formError: string = "";
+  formError: String = "";
 
-  // Inject Router dan service authentication
-  constructor(private fb: FormBuilder, private router: Router) {
+  //Inject class Router dan service authentication 
+  router: Router = inject(Router);
+  authService: AuthenticationService = inject(AuthenticationService); 
+
+  constructor(private fb: FormBuilder){
     this.registerForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -23,7 +30,7 @@ export class RegisterComponent {
   get name() {
     return this.registerForm.get('name');
   }
-
+  
   get email() {
     return this.registerForm.get('email');
   }
@@ -35,19 +42,22 @@ export class RegisterComponent {
   submitRegister(): void {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      console.log('Form submitted:', formData);
-
-      // Contoh pemanggilan service atau navigasi
-      // this.authService.register(formData).subscribe(response => {
-      //   this.router.navigate(['/login']);
-      // }, error => {
-      //   this.formError = 'Failed to register, please try again later.';
-      // });
-
-      // Untuk sementara, arahkan ke halaman sukses
-      this.router.navigate(['/success']);
+      console.log('Form submitted', formData);
+      //Panggil method submitRegister()
+      this.authService.submitRegister(this.registerForm)
+      .then((res)=>{
+          if(res.message != null){
+            this.formError = res.message;
+          }else if(res.token != null){
+            //this.authService.saveToken(res.token);
+            this.router.navigateByUrl('/');
+          }else{
+            this.formError = 'Register failed please try again';
+          }
+      });
     } else {
       this.formError = 'All fields are required, please try again';
+      //console.log('Form is not valid');
     }
   }
 }
